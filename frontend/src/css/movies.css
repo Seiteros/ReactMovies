@@ -1,0 +1,47 @@
+main button {
+  background-color: crimson;
+  color: white;
+  outline: none;
+}
+
+main button:focus {
+  outline: none;
+}
+
+.movies-list {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.movie {
+  text-align: center;
+  position: relative;
+}
+
+.movie-poster {
+  width: 300px;
+  height: 450px;
+  border: 1px black solid;
+}
+
+.movie-poster img {
+  max-width: 100%;
+}
+
+.checkbox-delete {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+.icon-star {
+  font-size: 2rem;
+  color: orange;
+}
+
+.icon-star-filled {
+  font-size: 2rem;
+  color: orange;
+}
