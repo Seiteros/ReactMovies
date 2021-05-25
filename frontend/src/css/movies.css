@@ -12,13 +12,62 @@ main button:focus {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  gap: 25px;
+  gap: 2rem;
+}
+
+.movie-details {
+  display: flex;
+  justify-content: center;
+}
+
+.movie-details .movie {
+  margin-left: 0.5rem;
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
+
+.movie-details .card {
+  border: 1px solid black;
+  margin-top: 3rem;
+  max-width: 675px;
+  min-width: 400px;
+  height: 450px;
+  word-wrap: break-word;
+  padding: 1em;
+  margin-right: 0.5rem;
+  flex-grow: 1;
+}
+
+.corner-buttons {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 975px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.edit-movie {
+  font-size: 1rem;
+  background-color: orange;
+  margin: 0.5em;
+  padding: 0.25em;
+}
+
+.delete-movie {
+  font-size: 1rem;
+  background-color: crimson;
+  margin: 0.5em;
+  padding: 0.25em;
+}
+
+.movie-details .card p {
+  margin-top: 2em;
 }
 
 .movie {
   text-align: center;
   position: relative;
-  width: 300px;
+  max-width: 300px;
   height: auto;
 }
 
@@ -46,4 +95,24 @@ main button:focus {
 .icon-star-filled {
   font-size: 2rem;
   color: orange;
+}
+
+@media only screen and (max-width: 720px) {
+  .movie-details {
+    flex-wrap: wrap;
+  }
+  .movie-details .movie {
+    margin-right: 0.5rem;
+  }
+  .movie-details .card {
+    max-width: 700px;
+    margin-left: 0.5em;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .movie-details .card {
+    min-width: 0;
+    padding: 0;
+  }
 }

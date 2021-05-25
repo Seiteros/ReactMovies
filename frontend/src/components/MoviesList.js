@@ -23,6 +23,7 @@ function MoviesList({ movies, isPending, setIsPending }) {
 
   return (
     <main>
+      {window.innerWidth}
       <button className="delete-button" onClick={deleteMovies}>
         Usuń zaznaczone filmy
       </button>
@@ -34,12 +35,12 @@ function MoviesList({ movies, isPending, setIsPending }) {
             <h2>
               {movie.title} ({movie.year})
             </h2>
-            <div className="movie-poster">
-              <Link to={"/movie/" + movie.id}>
+            <Link to={"/movie/" + movie.id}>
+              <div className="movie-poster">
                 <img src={movie.image_url} alt=""></img>
-              </Link>
-              <input type="checkbox" className="checkbox-delete" onChange={handelCheckedMovie} id={movie.id} />
-            </div>
+                {/* <input type="checkbox" className="checkbox-delete" onChange={handelCheckedMovie} id={movie.id} /> */}
+              </div>
+            </Link>
             <div className="movie-rating">
               {[...Array(movie.rating)].map((e, i) => (
                 <span key={i} className="icon-star-filled" />
@@ -48,6 +49,7 @@ function MoviesList({ movies, isPending, setIsPending }) {
                 <span key={i} className="icon-star" />
               ))}
             </div>
+            <input type="checkbox" className="checkbox-delete" onChange={handelCheckedMovie} id={movie.id} />
           </div>
         ))}
       </div>
