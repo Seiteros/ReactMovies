@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link, useHistory } from "react-router-dom";
 
 function MoviesList({ movies, isPending, setIsPending }) {
   const [checkedMovies, setCheckedMovies] = useState([]);
+  const history = useHistory();
 
   const handelCheckedMovie = (e) => {
     e.target.checked ? setCheckedMovies(checkedMovies.concat(parseInt(e.target.id))) : checkedMovies.splice(checkedMovies.indexOf(e.target.id), 1);
@@ -21,7 +23,10 @@ function MoviesList({ movies, isPending, setIsPending }) {
 
   return (
     <main>
-      <button onClick={deleteMovies}>Usuń zaznaczone filmy</button>
+      <button className="delete-button" onClick={deleteMovies}>
+        Usuń zaznaczone filmy
+      </button>
+      <button onClick={() => history.push("/add-movie")}>Dodaj film</button>
       <div className="movies-list">
         {isPending && <div>Loading...</div>}
         {movies.map((movie) => (
@@ -30,7 +35,9 @@ function MoviesList({ movies, isPending, setIsPending }) {
               {movie.title} ({movie.year})
             </h2>
             <div className="movie-poster">
-              <img src={movie.image_url} alt=""></img>
+              <Link to={"/movie/" + movie.id}>
+                <img src={movie.image_url} alt=""></img>
+              </Link>
               <input type="checkbox" className="checkbox-delete" onChange={handelCheckedMovie} id={movie.id} />
             </div>
             <div className="movie-rating">

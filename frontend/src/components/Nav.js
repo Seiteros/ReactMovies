@@ -1,9 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Nav() {
   return (
     <div>
-      <h1>Filmy</h1>
+      <Link to="/">
+        <h1>Filmy</h1>
+      </Link>
     </div>
   );
 }
