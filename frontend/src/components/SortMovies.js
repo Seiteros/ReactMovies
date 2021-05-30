@@ -24,16 +24,19 @@ function SortMovies({ data, setMovies }) {
   }, [sortType, data, setMovies]);
 
   return (
-    <div className="sort">
-      <label htmlFor="sort"> Sortuj: </label>
-      <select id="sort" onChange={(e) => setSortType(e.target.value)}>
-        <option value="title_asc"> Tytuł A-Z </option>
-        <option value="title_desc"> Tytuł Z-A </option>
-        <option value="rating_asc"> Ocena Rosnąco </option>
-        <option value="rating_desc"> Ocena Malejąco</option>
-        <option value="year_asc"> Data Rosnąco</option>
-        <option value="year_desc"> Data Malejąco </option>
-      </select>
+    <div className="container sort mt-5">
+      <div className="row p-1">
+        <div className="col-auto p-0">
+          <select className="form-select" id="sort" onChange={(e) => setSortType(e.target.value)}>
+            <option value="title_asc"> Tytuł A-Z </option>
+            <option value="title_desc"> Tytuł Z-A </option>
+            <option value="rating_asc"> Ocena Rosnąco </option>
+            <option value="rating_desc"> Ocena Malejąco</option>
+            <option value="year_asc"> Data Rosnąco</option>
+            <option value="year_desc"> Data Malejąco </option>
+          </select>
+        </div>
+      </div>
     </div>
   );
 }

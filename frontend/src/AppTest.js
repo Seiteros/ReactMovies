@@ -1,8 +1,6 @@
 import React from "react";
 import axios from "axios";
 
-import "./css/App.css";
-
 function AppTest() {
   const { filmy } = require("./filmy");
 

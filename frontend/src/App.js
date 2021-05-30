@@ -5,7 +5,6 @@ import MovieDetails from "./components/MovieDetails";
 import Movies from "./components/Movies";
 import Nav from "./components/Nav";
 
-import "./css/App.css";
 import "./fontello/css/fontello.css";
 
 function App() {

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "../css/movies.css";
 import SortMovies from "./SortMovies";
 import MoviesList from "./MoviesList";
 
@@ -14,7 +13,7 @@ function Movies() {
   }, [isPending]);
 
   return (
-    <div className="movies">
+    <div>
       <SortMovies data={data} setMovies={setMovies} />
       <MoviesList movies={movies} isPending={isPending} setIsPending={setIsPending} />
     </div>

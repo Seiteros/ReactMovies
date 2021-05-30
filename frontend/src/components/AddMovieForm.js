@@ -3,15 +3,15 @@ import { Formik, Form, Field } from "formik";
 import axios from "axios";
 
 function AddMovieForm() {
-  const validateGenre = (values) => {
-    let errors = {};
-    if (values.length > 10) {
-      errors.genre = "Za długi";
-    }
-    console.log(values);
-    console.log(errors);
-    return errors;
-  };
+  // const validateGenre = (values) => {
+  //   let errors = {};
+  //   if (values.length > 10) {
+  //     errors.genre = "Za długi";
+  //   }
+  //   console.log(values);
+  //   console.log(errors);
+  //   return errors;
+  // };
 
   return (
     <Formik
@@ -21,7 +21,7 @@ function AddMovieForm() {
         genre: "genre",
         year: 2021,
         description: "description",
-        image_url: "",
+        image_url: "http://www.theprintworks.com/wp-content/themes/psBella/assets/img/film-poster-placeholder.png",
       }}
       onSubmit={(values) => {
         console.log("submit");
@@ -31,10 +31,11 @@ function AddMovieForm() {
           .catch((error) => console.log(error));
       }}
     >
+      {/* validate={() => validateGenre} */}
       <Form>
         <Field name="title" type="text" />
         <Field name="director" type="text" />
-        <Field name="genre" type="text" validate={() => validateGenre} />
+        <Field name="genre" type="text" />
         <Field name="year" type="number" />
         <Field name="description" type="text" />
         <Field name="image_url" type="text" />
