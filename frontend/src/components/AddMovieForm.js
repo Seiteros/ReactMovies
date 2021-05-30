@@ -3,6 +3,16 @@ import { Formik, Form, Field } from "formik";
 import axios from "axios";
 
 function AddMovieForm() {
+  const validateGenre = (values) => {
+    let errors = {};
+    if (values.length > 10) {
+      errors.genre = "Za długi";
+    }
+    console.log(values);
+    console.log(errors);
+    return errors;
+  };
+
   return (
     <Formik
       initialValues={{
@@ -14,6 +24,7 @@ function AddMovieForm() {
         image_url: "",
       }}
       onSubmit={(values) => {
+        console.log("submit");
         axios
           .post("http://localhost:3000/movie", values)
           .then((response) => console.log(response))
@@ -23,7 +34,7 @@ function AddMovieForm() {
       <Form>
         <Field name="title" type="text" />
         <Field name="director" type="text" />
-        <Field name="genre" type="text" />
+        <Field name="genre" type="text" validate={() => validateGenre} />
         <Field name="year" type="number" />
         <Field name="description" type="text" />
         <Field name="image_url" type="text" />

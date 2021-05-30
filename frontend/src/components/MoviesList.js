@@ -41,14 +41,13 @@ function MoviesList({ movies, isPending, setIsPending }) {
                 {/* <input type="checkbox" className="checkbox-delete" onChange={handelCheckedMovie} id={movie.id} /> */}
               </div>
             </Link>
-            <div className="movie-rating">
-              {[...Array(movie.rating)].map((e, i) => (
-                <span key={i} className="icon-star-filled" />
-              ))}
-              {[...Array(5 - movie.rating)].map((e, i) => (
-                <span key={i} className="icon-star" />
-              ))}
-            </div>
+            {movie.rating && (
+              <div className="movie-rating">
+                {[...Array(5)].map((e, i) => {
+                  return movie.rating > i ? <span key={i} id={i} className="icon-star-filled" /> : <span key={i} id={i} className="icon-star" />;
+                })}
+              </div>
+            )}
             <input type="checkbox" className="checkbox-delete" onChange={handelCheckedMovie} id={movie.id} />
           </div>
         ))}
