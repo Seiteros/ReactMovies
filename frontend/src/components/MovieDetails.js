@@ -18,10 +18,15 @@ function MovieDetails() {
   }, [id, editMovie]);
 
   const hanedlDeleteMovie = () => {
-    axios
-      .delete(`http://localhost:3000/movie/${movie.id}`)
-      .then(history.push("/"))
-      .catch((error) => console.log(error));
+    const deleteData = async () => {
+      await axios
+        .delete(`http://localhost:3000/movie/${movie.id}`)
+        .then()
+        .catch((error) => console.log(error));
+    };
+    deleteData();
+    history.push({ pathname: "/" });
+    window.location.reload();
   };
 
   const handelRateMovie = (e) => {
@@ -57,7 +62,7 @@ function MovieDetails() {
           </div>
         </div>
         <div className="col-xxl-8 col-xl-8 col-lg-7">
-          <div className="card">
+          <div className="card movie-card">
             <div className="card-header d-flex justify-content-end corner-buttons">
               <button className="btn btn-primary fw-bold m-1" onClick={() => setEditMovie(true)}>
                 Edytuj
@@ -67,19 +72,21 @@ function MovieDetails() {
               </button>
             </div>
             {!editMovie && (
-              <div className="card-body">
+              <div className="card-body movie-card">
                 <h3 className="card-title">Gatunek: {movie.genre}</h3>
                 <h4 className="card-subtitle">Reżyser: {movie.director}</h4>
                 <p className="card-text"> {movie.description} </p>
               </div>
             )}
+            {editMovie && (
+              <div className="card-body movie-card d-flex flex-column justify-content-between">
+                <EditMovieForm movie={movie} setEditMovie={setEditMovie} />
+                <button className="btn btn-info" onClick={() => setEditMovie(false)}>
+                  Anuluj
+                </button>
+              </div>
+            )}
           </div>
-          {editMovie && (
-            <div className="card">
-              <EditMovieForm movie={movie} setEditMovie={setEditMovie} />
-              <button onClick={() => setEditMovie(false)}> Anuluj </button>
-            </div>
-          )}
         </div>
       </div>
     </div>

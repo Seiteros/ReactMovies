@@ -9,7 +9,11 @@ function Movies() {
   const [isPending, setIsPending] = useState(true);
 
   useEffect(() => {
-    isPending ? axios.get("http://localhost:3000/movies").then((response) => setData(response.data), setIsPending(false)) : console.log("załadowano");
+    const fetchData = async () => {
+      isPending ? await axios.get("http://localhost:3000/movies").then((response) => setData(response.data)) : console.log("załadowano");
+    };
+    fetchData();
+    setIsPending(false);
   }, [isPending]);
 
   return (

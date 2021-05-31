@@ -3,3 +3,13 @@
   max-height: 40vh;
   object-fit: contain;
 }
+
+.movie-card {
+  height: 100%;
+}
+
+@media screen and (min-height: 1081px) {
+  .poster {
+    height: 450px;
+  }
+}
