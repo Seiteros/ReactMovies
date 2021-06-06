@@ -76,22 +76,22 @@ POST /movie // Add movie
 
 // Parameters - przykładowe body
 {
-    "title": "Zielona mila",
+    "title": "Zielona mila", // unique value
     "director": "Frank Darabont",
     "genre": "Dramat",
-    "year": 1999, // wartość między 1000 a rokiem aktualnym
+    "year": 1999, // value between 1000 and current year
     "description": "Emerytowany strażnik więzienny...",
-    "image_url": null
+    "image_url": null //can be null
 }
 
 // Response
 {
-    "title": "Zielona mila", // unikalna wartość
+    "title": "Zielona mila", // unique value
     "director": "Frank Darabont",
     "genre": "Dramat",
     "year": 1999,
     "description": "Emerytowany strażnik więzienny...",
-    "image_url": null, // może być nullem
+    "image_url": null, // can be nulle
     "rating_count": 7,
     "rating": 4
 }
@@ -102,12 +102,12 @@ PUT /movie/{id} // Edit movie of id
 
 // Parameters - przykładowe body
 {
-    "title": "Zielona mila", // unikalna wartość
+    "title": "Zielona mila", // unique value
     "director": "Frank Darabont",
     "genre": "Dramat",
-    "year": 1999, // wartość między 1000 a rokiem aktualnym
+    "year": 1999, // value between 1000 and current year
     "description": "Emerytowany strażnik więzienny...",
-    "image_url": "https://..." // może być nullem
+    "image_url": "https://..." // can be nulle
 }
 
 // Response
