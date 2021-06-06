@@ -1,16 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./scss/custom.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import AppTest from "./AppTest";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    <AppTest />
   </React.StrictMode>,
   document.getElementById("root")
 );

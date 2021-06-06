@@ -12,8 +12,28 @@ html body {
   background-color: $dark;
 }
 
-.link-primary:hover {
+.link-secondary:hover {
   cursor: pointer;
+}
+
+.poster {
+  width: 100%;
+  max-height: 40vh;
+  object-fit: contain;
+}
+
+.movie-card {
+  height: 100%;
+}
+
+.year {
+  width: 4.8rem;
+}
+
+@media screen and (min-height: 1081px) {
+  .poster {
+    height: 450px;
+  }
 }
 
 //

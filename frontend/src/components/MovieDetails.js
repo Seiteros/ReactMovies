@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Redirect, useHistory } from "react-router";
+import { useParams, useHistory } from "react-router";
 import axios from "axios";
-import EditMovieForm from "./EditMovieForm";
+import { Link } from "react-router-dom";
+import MovieForm from "./MovieForm";
 
-function MovieDetails() {
+function MovieDetails({ setIsPending, favorites, setFavorites }) {
   const [movie, setMovie] = useState({});
   const [failed, setFailed] = useState(false);
   const [editMovie, setEditMovie] = useState(false);
   const { id } = useParams();
   const history = useHistory();
+  const [rated, setRated] = useState(false);
 
   useEffect(() => {
     axios
@@ -17,27 +19,46 @@ function MovieDetails() {
       .catch(() => setFailed(true));
   }, [id, editMovie]);
 
-  const hanedlDeleteMovie = () => {
-    const deleteData = async () => {
-      await axios
-        .delete(`http://localhost:3000/movie/${movie.id}`)
-        .then()
-        .catch((error) => console.log(error));
-    };
-    deleteData();
-    history.push({ pathname: "/" });
-    window.location.reload();
+  if (failed) {
+    setIsPending(true);
+    history.push("/");
+  }
+
+  const hanedlDeleteMovie = async () => {
+    try {
+      await axios.delete(`http://localhost:3000/movie/${movie.id}`);
+      await setIsPending(true);
+      history.push({ pathname: "/" });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handelRateMovie = (e) => {
-    let newScore = parseInt(e.target.id) + 1;
-    axios.patch(`http://localhost:3000/movie/${movie.id}/rate?score=${newScore}`).then((response) => console.log(response));
+    if (!rated) {
+      let newScore = parseInt(e.target.id) + 1;
+      axios.patch(`http://localhost:3000/movie/${movie.id}/rate?score=${newScore}`).then((response) => console.log(response));
+      setRated(true);
+    } else {
+      document.getElementById("icon-star-filled");
+    }
   };
+
+  const handelFavorites = () => {
+    if (favorites.includes(movie.id)) {
+      let newFavourites = [...favorites];
+      newFavourites.splice(newFavourites.indexOf(movie.id), 1);
+      setFavorites(newFavourites);
+    } else {
+      setFavorites([...favorites, movie.id]);
+    }
+  };
+
+  const starColor = rated ? "text-primary" : "link-secondary";
 
   return (
     <div className="container mt-5">
       <div className="row">
-        {failed ? <Redirect to="/" /> : null}
         <div className="col-xxl-4 col-xl-4 col-lg-5">
           <div className="card movie-detail">
             <div className="card-body mx-0 px-0">
@@ -51,9 +72,9 @@ function MovieDetails() {
                 <div className="stars text-center fs-1 ">
                   {[...Array(5)].map((e, i) => {
                     return movie.rating > i ? (
-                      <span key={i} id={i} className="icon-star-filled link-primary" onClick={(e) => handelRateMovie(e)} />
+                      <span key={i} id={i} className={`icon-star-filled ${starColor}`} onClick={(e) => handelRateMovie(e)} />
                     ) : (
-                      <span key={i} id={i} className="icon-star link-primary" onClick={(e) => handelRateMovie(e)} />
+                      <span key={i} id={i} className={`icon-star ${starColor}`} onClick={(e) => handelRateMovie(e)} />
                     );
                   })}
                 </div>
@@ -64,25 +85,32 @@ function MovieDetails() {
         <div className="col-xxl-8 col-xl-8 col-lg-7">
           <div className="card movie-card">
             <div className="card-header d-flex justify-content-end corner-buttons">
+              <button className="btn btn-info m-1 p-1" onClick={handelFavorites}>
+                {favorites.includes(movie.id) && <span className="icon-heart fs-3 text-danger"></span>}
+                {!favorites.includes(movie.id) && <span className="icon-heart-empty fs-3 text-danger"></span>}
+              </button>
               <button className="btn btn-primary fw-bold m-1" onClick={() => setEditMovie(true)}>
                 Edytuj
               </button>
               <button className="btn btn-danger fw-bold m-1" onClick={hanedlDeleteMovie}>
                 Usuń
               </button>
+              <Link to="/" className="btn btn-secondary fw-bold m-1 ps-4 pe-4 d-flex align-items-center" onClick={() => setIsPending(true)}>
+                <span> X</span>
+              </Link>
             </div>
             {!editMovie && (
               <div className="card-body movie-card">
                 <h3 className="card-title">Gatunek: {movie.genre}</h3>
                 <h4 className="card-subtitle">Reżyser: {movie.director}</h4>
-                <p className="card-text"> {movie.description} </p>
+                <p className="card-text mt-2"> {movie.description} </p>
               </div>
             )}
             {editMovie && (
               <div className="card-body movie-card d-flex flex-column justify-content-between">
-                <EditMovieForm movie={movie} setEditMovie={setEditMovie} />
+                <MovieForm movie={movie} newMovie={false} />
                 <button className="btn btn-info" onClick={() => setEditMovie(false)}>
-                  Anuluj
+                  Zamknij edycje
                 </button>
               </div>
             )}

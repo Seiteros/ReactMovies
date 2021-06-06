@@ -24,7 +24,7 @@ function SortMovies({ data, setMovies }) {
   }, [sortType, data, setMovies]);
 
   return (
-    <div className="container sort mt-5">
+    <div className="container sort mt-4">
       <div className="row p-1">
         <div className="col-auto p-0">
           <select className="form-select" id="sort" onChange={(e) => setSortType(e.target.value)}>
