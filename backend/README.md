@@ -1,8 +1,8 @@
 # REST API MOVIES
 
-## Konfiguracja bazy danych
+## Database Configuration
 
-Po zainstalowaniu bazy danych należy podmienić konfigurację w pliku `index.js` (linie 15-21):
+After DB install change config in `index.js` file (linie 15-21):
 
 ```js
 const client = new Pool ({
@@ -10,33 +10,33 @@ const client = new Pool ({
     port: process.env.PGPORT || 5432, // podaj port
     database: process.env.PGDB || 'postgres',
     user: process.env.PGUSER || 'postgres',
-    password: process.env.POSTGRES_PASS || 'zaq1@WSX' // podaj hasło
+    password: process.env.POSTGRES_PASS || 'zaq1@WSX' // change password
 });
 ```
 
 
-## Uruchomienie backendu
+## Available Scripts
 
-Instalacja potrzebnych paczek:
+Installing the necessary packages:
 ```
 yarn install
 ```
 
-Uruchomienie backendu
+Backend start:
 ```
 yarn start
 ```
 
-Projekt jest dostępny pod adresem:
+Backend available at:
 ```
 http://localhost:3000
 ```
 
 
-## Dostępne endpointy
+## Available endpoints:
 
 ```json
-GET /movies // Pobieranie wszystkich filmów
+GET /movies // Get all movies
 
 // Response
 [
@@ -55,7 +55,7 @@ GET /movies // Pobieranie wszystkich filmów
 ```
 
 ```json
-GET /movie/{id} // Pobieranie filmu o podanym id
+GET /movie/{id} // Get movie of id
 
 // Response
 {
@@ -72,7 +72,7 @@ GET /movie/{id} // Pobieranie filmu o podanym id
 ```
 
 ```json
-POST /movie // Dodawanie filmu
+POST /movie // Add movie
 
 // Parameters - przykładowe body
 {
@@ -98,7 +98,7 @@ POST /movie // Dodawanie filmu
 ```
 
 ```json
-PUT /movie/{id} // Edytowanie filmu o podanym id
+PUT /movie/{id} // Edit movie of id
 
 // Parameters - przykładowe body
 {
@@ -122,11 +122,11 @@ PUT /movie/{id} // Edytowanie filmu o podanym id
 ```
 
 ```json
-DELETE /movie/{id} // Usuwanie filmu o podanym id
+DELETE /movie/{id} // Delete movie of id
 ```
 
 ```json
-GET /movie/{id}/rate // Pobieranie oceny filmu dla podanego id filmu
+GET /movie/{id}/rate // Get rating of movie of id
 
 // Response 
 {
@@ -137,10 +137,10 @@ GET /movie/{id}/rate // Pobieranie oceny filmu dla podanego id filmu
 ```
 
 ```json
-PATCH /movie/{id}/rate // Ocenianie filmu dla podanego id filmu
+PATCH /movie/{id}/rate // Rate movie of id
 
 // Parameters - query
-score // ?score={score}, gdzie wartość score wynosi między 1 a 5
+score // ?score={score}, where score between 1 and 5
 
 // Response 
 {
