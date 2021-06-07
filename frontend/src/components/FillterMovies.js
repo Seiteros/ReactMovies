@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function FillterMovies({ data, favorites, filteredData, setFilteredData, setFilter }) {
+function FillterMovies({ data, favorites, setFilteredData, setFilter, setCurrentPage }) {
   const [favFilter, setFavFilter] = useState(false);
   const [titleFilter, setTitleFilter] = useState(false);
   const [yearFilter, setYearFilter] = useState(false);
@@ -17,14 +17,14 @@ function FillterMovies({ data, favorites, filteredData, setFilteredData, setFilt
   useEffect(() => {
     if ([favFilter, titleFilter, yearFilter].some((filter) => filter === true)) {
       setFilter(true);
-      console.log("filtruje");
+      setCurrentPage(0);
       let intersection = favData.filter((x) => titleData.includes(x)).filter((x) => yearData.includes(x));
       setFilteredData(intersection);
     } else {
       setFilter(false);
       setFilteredData(data);
     }
-  }, [setFilter, data, setFilteredData, favFilter, titleFilter, yearFilter, favData, titleData, yearData]);
+  }, [setFilter, data, setFilteredData, favFilter, titleFilter, yearFilter, favData, titleData, yearData, setCurrentPage]);
 
   const handelCheckedFavorites = (e) => {
     if (e.target.checked) {

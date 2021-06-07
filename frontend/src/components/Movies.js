@@ -69,7 +69,7 @@ function Movies({ isPending, setIsPending, favorites }) {
   return (
     <div className="container">
       <SortMovies data={filter ? filteredData : data} setMovies={setMovies} />
-      <FillterMovies data={data} favorites={favorites} filteredData={filteredData} setFilteredData={setFilteredData} setFilter={setFilter} />
+      <FillterMovies data={data} favorites={favorites} setFilteredData={setFilteredData} setFilter={setFilter} setCurrentPage={setCurrentPage} />
       <MoviesList
         movies={currentMovies}
         isPending={isPending}
@@ -84,6 +84,7 @@ function Movies({ isPending, setIsPending, favorites }) {
         pageRangeDisplayed={pageRangeDisplayed}
         marginPagesDisplayed={marginPagesDisplayed}
         onPageChange={changePage}
+        forcePage={currentPage}
         containerClassName={"pagination mt-1 d-flex justify-content-center"}
         pageClassName={"page-item"}
         pageLinkClassName={"page-link"}

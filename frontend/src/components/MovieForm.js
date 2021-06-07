@@ -109,11 +109,18 @@ function MovieForm({ movie, newMovie }) {
               }
             })
             .catch((error) => {
-              console.log(error);
-              setStatus({
-                sent: false,
-                msg: `Error! ${error}. Spróbuj ponownie później.`,
-              });
+              console.log(error.response.data);
+              if (error.response.data === "TITLE_DUPLICATE") {
+                setStatus({
+                  sent: false,
+                  msg: "Tytuł musi byc unikatowy",
+                });
+              } else {
+                setStatus({
+                  sent: false,
+                  msg: `Error! ${error}. Spróbuj ponownie później.`,
+                });
+              }
             });
           setSubmitting(false);
         };
@@ -131,11 +138,17 @@ function MovieForm({ movie, newMovie }) {
               }
             })
             .catch((error) => {
-              console.log(error);
-              setStatus({
-                sent: false,
-                msg: `Error! ${error}. Spróbuj ponownie później.`,
-              });
+              if (error.response.data === "TITLE_DUPLICATE") {
+                setStatus({
+                  sent: false,
+                  msg: "Tytuł musi byc unikatowy",
+                });
+              } else {
+                setStatus({
+                  sent: false,
+                  msg: `Error! ${error}. Spróbuj ponownie później.`,
+                });
+              }
             });
           setSubmitting(false);
         };
